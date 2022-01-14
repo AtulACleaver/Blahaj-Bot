@@ -20,7 +20,18 @@ async def on_ready():
 
 
 @client.command()
-async def hello(ctx):
-    await ctx.reply("Hey!")
+async def blahaj(ctx):
+    def random_blahaj():
+        with open('blahaj.json') as dt:
+            data = json.load(dt)
+            random_index = random.randint(0, len(data) - 1)
+            return data[random_index]["url"], data[random_index]["name"]
+
+    blahajImageLink, blahajImageName = random_blahaj()
+    embed = discord.Embed(
+        description=f"Here is a **{blahajImageName}** 🦈", color=discord.Color.from_rgb(178, 208, 250))
+    embed.set_image(url=blahajImageLink)
+    await ctx.send(embed=embed)
+
 
 client.run(TOKEN)
