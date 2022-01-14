@@ -19,6 +19,13 @@ async def on_ready():
     print("We Are Ready Now")
 
 
+@client.event
+async def on_message(message):
+    if client.user.mentioned_in(message):
+        await message.reply("☄ Blahaj Shower 🦈")
+    await client.process_commands(message)
+
+
 @client.command()
 async def blahaj(ctx):
     def random_blahaj():
@@ -31,7 +38,7 @@ async def blahaj(ctx):
     embed = discord.Embed(
         description=f"Here is a **{blahajImageName}** 🦈", color=discord.Color.from_rgb(178, 208, 250))
     embed.set_image(url=blahajImageLink)
-    await ctx.send(embed=embed)
+    await ctx.reply(embed=embed)
 
 
 client.run(TOKEN)
